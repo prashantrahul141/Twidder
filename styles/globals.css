@@ -1,6 +1,8 @@
 :root {
-  --background: #24241f;
-  --standard-white: rgb(190, 190, 180);
+  --background: #1f2024;
+  --background-light: #2a3048;
+  --standard-white: #f3efff;
+  --accent-blue: #1976d2;
 }
 
 html,

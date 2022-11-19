@@ -1,4 +1,4 @@
-import CompHead from '../components/common/CompHead';
+import CompHead from '@components/common/CompHead';
 
 const About = () => {
   return (
