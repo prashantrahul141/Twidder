@@ -1,7 +1,13 @@
+:root {
+  --background: #24241f;
+  --standard-white: rgb(190, 190, 180);
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: var(--background);
 }
