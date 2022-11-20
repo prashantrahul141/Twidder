@@ -27,7 +27,7 @@ const CompSpeedDial: FC = () => {
       sx={{
         position: 'absolute',
         bottom: '10%',
-        right: '10%',
+        right: 'min(10%, 100px)',
       }}
       icon={<SpeedDialIcon />}>
       {actions.map((action) => (
@@ -35,11 +35,11 @@ const CompSpeedDial: FC = () => {
           key={action.name}
           icon={action.icon}
           sx={{
-            backgroundColor: Colors.background,
+            backgroundColor: Colors.blue_background,
             color: Colors.standard_white,
             ':hover': {
               backgroundColor: Colors.standard_white,
-              color: Colors.background,
+              color: Colors.blue_background,
             },
           }}
           tooltipTitle={action.name}

@@ -4,7 +4,7 @@ const CompHead = ({ headTitle }: { headTitle: string }) => {
   return (
     <Head>
       <title>{`Twidder | ${headTitle}`}</title>
-      <meta name='description' content='My Twidder Clone.' />
+      <meta name='description' content='My Twidder' />
     </Head>
   );
 };
