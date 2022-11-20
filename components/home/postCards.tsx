@@ -5,21 +5,21 @@ import CompPostCard from './postCard';
 const PostCards = ({ _postcard }: { _postcard: TypePost[] }) => {
   return (
     <>
-      {_postcard.map((_eachpost) => {
-        return (
-          <>
-            <Box
-              sx={{
-                maxWidth: 550,
-                margin: '0 auto',
-              }}>
+      <Box
+        sx={{
+          maxWidth: 600,
+          margin: '75px auto',
+        }}>
+        {_postcard.map((_eachpost) => {
+          return (
+            <>
               <CompPostCard
                 key={_eachpost.authorUsername}
                 _postcard={_eachpost}></CompPostCard>
-            </Box>
-          </>
-        );
-      })}
+            </>
+          );
+        })}
+      </Box>
     </>
   );
 };

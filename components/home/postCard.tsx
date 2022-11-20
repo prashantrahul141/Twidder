@@ -13,24 +13,33 @@ import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import { Colors } from '@constants/colors';
 import { TypePost } from 'types/types';
-import { FontSizes } from '@constants/FontSizes';
+import { useRouter } from 'next/router';
 
 const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
+  const router = useRouter();
+
   return (
     <>
       <Card
         sx={{
-          maxWidth: 550,
+          maxWidth: 600,
           backgroundColor: Colors.background,
           border: `0.2pt inset ${Colors.standard_light_white}`,
           borderRadius: '8px',
           margin: '0px 10px',
+          cursor: 'pointer',
         }}>
         <Stack
           direction='row'
           spacing={1.5}
           sx={{ marginLeft: 2, marginTop: 2 }}>
-          <Avatar variant='circular' src={`${_postcard.authorProfile}`} />
+          <Avatar
+            variant='circular'
+            onClick={() => {
+              router.push(`./${_postcard.authorUsername}`);
+            }}
+            src={`${_postcard.authorProfile}`}
+          />
           <Stack spacing={0.1} direction='row'>
             <Typography
               fontWeight={400}
@@ -39,7 +48,10 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
               letterSpacing='0.078rem'
               display={'flex'}
               justifyContent='center'
-              alignItems={'center'}>
+              alignItems={'center'}
+              onClick={() => {
+                router.push(`./${_postcard.authorUsername}`);
+              }}>
               {_postcard.authorName}&nbsp;
             </Typography>
 
@@ -58,7 +70,10 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
           </Stack>
         </Stack>
 
-        <CardContent>
+        <CardContent
+          onClick={() => {
+            router.push(`./post/${_postcard.postId}`);
+          }}>
           <Typography
             variant='body2'
             fontFamily={'Lato'}
@@ -71,7 +86,7 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
           {_postcard.photoData !== null && (
             <CardMedia
               component='img'
-              height='220'
+              height='350'
               image={`${_postcard.photoData}`}
               alt='img'
               sx={{
