@@ -51,6 +51,7 @@ const TopBar = () => {
             height: '60px',
             marginBottom: '30px',
             background: `${Colors.background}`,
+            boxShadow: '0px 3px 10px black',
           }}>
           <Toolbar>
             <Typography
