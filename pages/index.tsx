@@ -3,6 +3,7 @@ import CompHead from '@components/common/CompHead';
 import CompSpeedDial from '@components/common/SpeedDial';
 import PostCards from '@components/home/postCards';
 import { TypePost } from 'types/types';
+import TopBar from '@components/common/Topbar';
 
 const Home = () => {
   const sampleTwdeetDatas: TypePost[] = [
@@ -29,6 +30,7 @@ const Home = () => {
   return (
     <div>
       <CompHead headTitle='Home'></CompHead>
+      <TopBar></TopBar>
       <CompSpeedDial></CompSpeedDial>
       <PostCards _postcard={sampleTwdeetDatas}></PostCards>
     </div>
