@@ -46,7 +46,7 @@ const TopBar = () => {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
-          position='static'
+          position='fixed'
           sx={{
             height: '60px',
             marginBottom: '30px',

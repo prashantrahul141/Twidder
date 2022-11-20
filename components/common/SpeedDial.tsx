@@ -25,7 +25,7 @@ const CompSpeedDial: FC = () => {
     <SpeedDial
       ariaLabel='Speed Dial'
       sx={{
-        position: 'absolute',
+        position: 'fixed',
         bottom: '10%',
         right: 'min(10%, 100px)',
       }}
