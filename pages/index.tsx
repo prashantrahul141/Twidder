@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import CompHead from '@components/common/CompHead';
 import CompSpeedDial from '@components/common/SpeedDial';
-import PostCards from '@components/common/home/postCards';
+import PostCards from '@components/home/postCards';
 import { TypePost } from 'types/types';
 
 const Home = () => {
