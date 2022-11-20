@@ -3,7 +3,7 @@ type TypePost = {
   authorUsername: string;
   authorProfile: string;
   postTime: string;
-  likes: number;
+  likes: string;
   textData: string;
   photoData: null | string;
 };

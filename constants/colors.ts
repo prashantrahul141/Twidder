@@ -9,4 +9,5 @@ let Colors = {
   comment_hover: 'rgba(80, 80, 220, 0.9)',
   share_hover: 'rgba(59, 255, 59, 0.8)',
 };
+
 export { Colors };

@@ -13,6 +13,7 @@ import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import { Colors } from '@constants/colors';
 import { TypePost } from 'types/types';
+import { FontSizes } from '@constants/FontSizes';
 
 const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
   return (
@@ -35,7 +36,7 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
               fontWeight={400}
               color={Colors.standard_white}
               fontFamily={'Oswald'}
-              letterSpacing='1.4px'
+              letterSpacing='0.078rem'
               display={'flex'}
               justifyContent='center'
               alignItems={'center'}>
@@ -46,21 +47,8 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
               variant='body2'
               fontWeight={400}
               fontFamily={'Roboto Mono'}
-              fontSize={'0.95rem'}
-              letterSpacing='0.4px'
-              display={'flex'}
-              justifyContent='center'
-              alignItems={'center'}
-              color={Colors.standard_light_white}>
-              @{_postcard.authorUsername}&nbsp;
-            </Typography>
-
-            <Typography
-              variant='body2'
-              fontWeight={400}
-              fontFamily={'Roboto Mono'}
-              fontSize={'0.8rem'}
-              letterSpacing='0.4px'
+              fontSize={'0.6rem'}
+              letterSpacing='0.025rem'
               display={'flex'}
               justifyContent='center'
               alignItems={'center'}
@@ -76,7 +64,7 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
             fontFamily={'Lato'}
             color={Colors.standard_white}
             fontWeight={400}
-            letterSpacing='1.1px'
+            letterSpacing='0.04rem'
             fontSize={'0.9rem'}>
             {_postcard.textData}
           </Typography>
