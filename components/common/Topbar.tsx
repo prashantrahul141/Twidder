@@ -9,8 +9,10 @@ import {
 import { Colors } from '@constants/colors';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const TopBar = () => {
+  const router = useRouter();
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseEnterLogin = () => {
@@ -23,7 +25,16 @@ const TopBar = () => {
 
   const loginAvatar = (loggedIn: boolean) => {
     if (loggedIn) {
-      return <Avatar alt='' src='/static/images/avatar/2.jpg' />;
+      return (
+        <Avatar
+          alt=''
+          onClick={() => {
+            router.push('./profile');
+          }}
+          sx={{ cursor: 'pointer' }}
+          src='/static/images/avatar/2.jpg'
+        />
+      );
     } else {
       return (
         <Button color='inherit'>
@@ -44,34 +55,47 @@ const TopBar = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar
-          position='fixed'
-          sx={{
-            height: '60px',
-            marginBottom: '30px',
-            background: `${Colors.background}`,
-            boxShadow: '0px 3px 10px black',
-          }}>
-          <Toolbar>
-            <Typography
-              color={Colors.standard_white}
-              fontFamily={'Oswald'}
-              letterSpacing='0.09rem'
-              fontSize={'1.8rem'}
-              variant='h4'
-              component='div'
-              sx={{ flexGrow: 1 }}>
-              <Link
-                href={'./'}
-                style={{ textDecoration: 'none', color: Colors.accent_blue }}>
-                Twidder
-              </Link>
-            </Typography>
-            {loginAvatar(false)}
-          </Toolbar>
-        </AppBar>
-      </Box>
+      <div
+        style={{
+          width: '100vw',
+          background: `${Colors.background}`,
+          height: '60px',
+          boxShadow: '0px 3px 10px black',
+          position: 'fixed',
+          zIndex: '1',
+          top: '0',
+        }}>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar
+            position='fixed'
+            sx={{
+              height: '60px',
+              background: `${Colors.background}`,
+              boxShadow: 'none',
+              maxWidth: '900px',
+              left: '50%',
+              transform: 'translate(-50%)',
+            }}>
+            <Toolbar>
+              <Typography
+                color={Colors.standard_white}
+                fontFamily={'Oswald'}
+                letterSpacing='0.09rem'
+                fontSize={'1.8rem'}
+                variant='h4'
+                component='div'
+                sx={{ flexGrow: 1 }}>
+                <Link
+                  href={'./'}
+                  style={{ textDecoration: 'none', color: Colors.accent_blue }}>
+                  Twidder
+                </Link>
+              </Typography>
+              {loginAvatar(false)}
+            </Toolbar>
+          </AppBar>
+        </Box>
+      </div>
     </>
   );
 };

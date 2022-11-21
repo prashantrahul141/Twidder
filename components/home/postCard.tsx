@@ -86,7 +86,7 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
           {_postcard.photoData !== null && (
             <CardMedia
               component='img'
-              height='350'
+              height='300'
               image={`${_postcard.photoData}`}
               alt='img'
               sx={{
