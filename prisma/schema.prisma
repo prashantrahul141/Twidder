@@ -8,51 +8,54 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(uuid())
-  authorEmail    String   @unique
-  authorName     String
-  authorUsername String
-  authorProfile  String
-  authorBio      String?
-  authorJoinedOn DateTime
+  id                   String   @id @default(uuid())
+  author_email         String   @unique
+  author_name          String
+  author_username      String
+  author_profile_photo String
+  author_bio           String?
+  author_joined_on     DateTime
 
-  followers         User[] @relation("followers")
-  followersRelation User[] @relation("followers")
+  followers          User[] @relation("followers")
+  followers_relation User[] @relation("followers")
 
-  followings         User[] @relation("followings")
-  followingsRelation User[] @relation("followings")
+  followings          User[] @relation("followings")
+  followings_relation User[] @relation("followings")
 
-  Posts Post[] @relation("Author")
-  Likes Post[] @relation("Favourites")
+  posts Post[] @relation("Author")
+  likes Post[] @relation("Favourites")
 
-  Comments Comment[]
+  comments Comment[]
 }
 
 model Post {
-  id        String   @id @default(uuid())
-  postText  String
-  postImage String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Likes     Int      @default(0)
+  id         String   @id @default(uuid())
+  post_text  String
+  post_image String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  likes      Int      @default(0)
 
-  author   User?   @relation("Author", fields: [authorId], references: [id])
-  authorId String?
+  author    User?   @relation("Author", fields: [author_id], references: [id])
+  author_id String?
 
-  favouritedBy   User?   @relation("Favourites", fields: [favouritedById], references: [id])
-  favouritedById String?
+  favourited_by    User?   @relation("Favourites", fields: [favourited_by_id], references: [id])
+  favourited_by_id String?
 
   comments Comment[]
 }
 
 model Comment {
-  id          String @id @default(uuid())
-  CommentText String
-  Likes       Int    @default(0)
+  id           String @id @default(uuid())
+  comment_text String
+  likes        Int    @default(0)
 
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  user    User?   @relation(fields: [user_id], references: [id])
+  user_id String?
 
-  Post   Post?   @relation(fields: [postId], references: [id])
-  postId String?
+  post    Post?   @relation(fields: [post_id], references: [id])
+  post_id String?
+
+  replies          Comment[] @relation("replies")
+  replies_relation Comment[] @relation("replies")
 }
