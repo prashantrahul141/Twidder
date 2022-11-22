@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import CompHead from '@components/common/CompHead';
 import CompSpeedDial from '@components/common/SpeedDial';
 import PostCards from '@components/home/postCards';
@@ -6,18 +5,21 @@ import { TypePost } from 'types/types';
 import TopBar from '@components/common/Topbar';
 
 const Home = () => {
-  const sampleTwdeetDatas: TypePost[] = [];
+  let sampleTwdeetDatas: TypePost[] = [];
+
   for (let i = 0; i < 10; i++) {
     sampleTwdeetDatas.push({
-      authorId: faker.datatype.uuid(),
-      authorName: faker.name.fullName(),
-      authorUsername: faker.internet.userName(),
-      authorProfile: faker.internet.avatar(),
-      postId: faker.datatype.uuid(),
-      postTime: faker.date.recent(10).toLocaleDateString(),
-      textData: faker.lorem.lines(3),
-      likes: faker.random.numeric(),
-      photoData: faker.image.image(),
+      authorId: `thisisanid${i}`,
+      authorName: 'fullnamne',
+      authorUsername: 'username',
+      authorProfile:
+        'https://i.picsum.photos/id/880/536/354.jpg?hmac=Tpt84Al9HFHuVxRHGO8W4_7jGxTE3zkPbVrg6GZGVSU',
+      postId: '1215454',
+      postTime: '12/7/2022',
+      textData: 'this is a post data.',
+      likes: '1',
+      photoData:
+        'https://i.picsum.photos/id/880/536/354.jpg?hmac=Tpt84Al9HFHuVxRHGO8W4_7jGxTE3zkPbVrg6GZGVSU',
     });
   }
 
