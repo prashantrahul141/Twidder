@@ -12,11 +12,9 @@ const PostCards = ({ _postcard }: { _postcard: TypePost[] }) => {
         }}>
         {_postcard.map((_eachpost) => {
           return (
-            <>
-              <CompPostCard
-                key={_eachpost.authorUsername}
-                _postcard={_eachpost}></CompPostCard>
-            </>
+            <CompPostCard
+              key={_eachpost.authorId}
+              _postcard={_eachpost}></CompPostCard>
           );
         })}
       </Box>
