@@ -2,7 +2,6 @@ import CompHead from '@components/common/CompHead';
 import SignUplogIn from '@components/forms/SignUplogIn';
 import { Colors } from '@constants/colors';
 import { Box, Typography } from '@mui/material';
-import { Component } from 'react';
 
 const SignUp = () => {
   return (
@@ -24,14 +23,16 @@ const SignUp = () => {
               display: 'inline',
             }}>
             WELCOME TO&nbsp;
-            <Typography
-              color={Colors.accent_blue}
-              variant='h2'
-              letterSpacing={1.9}
-              fontFamily={'Oswald'}
-              sx={{ display: 'inline' }}>
-              TWIDDER.
-            </Typography>
+            <div>
+              <Typography
+                color={Colors.accent_blue}
+                variant='h2'
+                letterSpacing={1.9}
+                fontFamily={'Oswald'}
+                sx={{ display: 'inline' }}>
+                TWIDDER.
+              </Typography>
+            </div>
           </Typography>
         </Box>
         <SignUplogIn btnString='Sign up'></SignUplogIn>
