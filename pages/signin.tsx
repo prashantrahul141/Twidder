@@ -1,5 +1,5 @@
 import CompHead from '@components/common/CompHead';
-import SignUplogIn from '@components/forms/SignUplogIn';
+import Signin from '@components/forms/Signin';
 import { Colors } from '@constants/colors';
 import { Box, Typography } from '@mui/material';
 import Link from 'next/link';
@@ -38,7 +38,7 @@ const SignUp = () => {
             </Typography>
           </Box>
         </Link>
-        <SignUplogIn btnString='Sign up'></SignUplogIn>
+        <Signin btnString='Sign up'></Signin>
       </Box>
     </>
   );

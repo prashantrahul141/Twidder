@@ -35,13 +35,14 @@ model Session {
 }
 
 model User {
-  id                   String   @id @default(uuid())
-  author_email         String   @unique
-  author_name          String
-  author_username      String
-  author_profile_photo String
-  author_bio           String?
-  author_joined_on     DateTime
+  id               String    @id @default(cuid())
+  name             String?
+  email            String?   @unique
+  emailVerified    DateTime?
+  username         String?   @unique
+  image            String?
+  author_bio       String?
+  author_joined_on DateTime? @default(now())
 
   followers          User[] @relation("followers")
   followers_relation User[] @relation("followers")

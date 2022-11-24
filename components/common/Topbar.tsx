@@ -39,14 +39,14 @@ const TopBar = () => {
       return (
         <Button color='inherit'>
           <Link
-            href={'./login'}
+            href={'./signin'}
             style={{
               textDecoration: 'none',
               color: isHovering ? 'white' : Colors.standard_light_white,
             }}
             onMouseEnter={handleMouseEnterLogin}
             onMouseLeave={handleMouseEnterLeave}>
-            Login
+            Sign in
           </Link>
         </Button>
       );
