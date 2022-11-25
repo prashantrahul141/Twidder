@@ -7,8 +7,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
 import CreateIcon from '@mui/icons-material/Create';
 import { Colors } from '@constants/colors';
+import { useSession } from 'next-auth/react';
 
 const CompSpeedDial: FC = () => {
+  const { data: session, status } = useSession();
   const router = useRouter();
   const actions = [
     { icon: <HomeIcon />, name: 'Home', url_: '/' },
@@ -22,33 +24,37 @@ const CompSpeedDial: FC = () => {
     { icon: <CreateIcon />, name: 'Create', url_: '/create' },
   ];
   return (
-    <SpeedDial
-      ariaLabel='Speed Dial'
-      sx={{
-        position: 'fixed',
-        bottom: '10%',
-        right: 'min(10%, 100px)',
-      }}
-      icon={<SpeedDialIcon />}>
-      {actions.map((action) => (
-        <SpeedDialAction
-          key={action.name}
-          icon={action.icon}
+    <>
+      {status === 'authenticated' && (
+        <SpeedDial
+          ariaLabel='Speed Dial'
           sx={{
-            backgroundColor: Colors.blue_background,
-            color: Colors.standard_white,
-            ':hover': {
-              backgroundColor: Colors.standard_white,
-              color: Colors.blue_background,
-            },
+            position: 'fixed',
+            bottom: '10%',
+            right: 'min(10%, 100px)',
           }}
-          tooltipTitle={action.name}
-          onClick={() => {
-            router.push(action.url_);
-          }}
-        />
-      ))}
-    </SpeedDial>
+          icon={<SpeedDialIcon />}>
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              sx={{
+                backgroundColor: Colors.blue_background,
+                color: Colors.standard_white,
+                ':hover': {
+                  backgroundColor: Colors.standard_white,
+                  color: Colors.blue_background,
+                },
+              }}
+              tooltipTitle={action.name}
+              onClick={() => {
+                router.push(action.url_);
+              }}
+            />
+          ))}
+        </SpeedDial>
+      )}
+    </>
   );
 };
 
