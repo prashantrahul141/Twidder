@@ -1,10 +1,9 @@
 import { Button, FormControl } from '@mui/material';
 import { signIn } from 'next-auth/react';
 import { Colors } from '@constants/colors';
-import { useSession } from 'next-auth/react';
+import { FC } from 'react';
 
-const Signin = ({ btnString }: { btnString: string }) => {
-  const { data: session } = useSession();
+const Signin: FC = () => {
   return (
     <FormControl
       sx={{
