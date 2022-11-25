@@ -9,49 +9,13 @@ import {
 import { Colors } from '@constants/colors';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { signOut, useSession } from 'next-auth/react';
 
 const TopBar = () => {
-  const router = useRouter();
+  const { data: session, status } = useSession();
+
   const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseEnterLogin = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseEnterLeave = () => {
-    setIsHovering(false);
-  };
-
-  const loginAvatar = (loggedIn: boolean) => {
-    if (loggedIn) {
-      return (
-        <Avatar
-          alt=''
-          onClick={() => {
-            router.push('./profile');
-          }}
-          sx={{ cursor: 'pointer' }}
-          src='/static/images/avatar/2.jpg'
-        />
-      );
-    } else {
-      return (
-        <Button color='inherit'>
-          <Link
-            href={'./signin'}
-            style={{
-              textDecoration: 'none',
-              color: isHovering ? 'white' : Colors.standard_light_white,
-            }}
-            onMouseEnter={handleMouseEnterLogin}
-            onMouseLeave={handleMouseEnterLeave}>
-            Sign in
-          </Link>
-        </Button>
-      );
-    }
-  };
+  const [avatarClick, setAvatarClick] = useState(false);
 
   return (
     <>
@@ -60,7 +24,7 @@ const TopBar = () => {
           width: '100vw',
           background: `${Colors.background}`,
           height: '60px',
-          boxShadow: '0px 3px 10px black',
+          boxShadow: `0px 3px 10px ${Colors.shadow_light}`,
           position: 'fixed',
           zIndex: '1',
           top: '0',
@@ -91,7 +55,73 @@ const TopBar = () => {
                   Twidder
                 </Link>
               </Typography>
-              {loginAvatar(false)}
+
+              {status === 'authenticated' && (
+                <Avatar
+                  alt=''
+                  onClick={() => setAvatarClick(!avatarClick)}
+                  sx={{ cursor: 'pointer' }}
+                  src='/static/images/avatar/2.jpg'
+                />
+              )}
+
+              {status === 'authenticated' && avatarClick && (
+                <Box
+                  sx={{
+                    width: '120px',
+                    height: 'fit-content',
+                    position: 'absolute',
+                    left: '76%',
+                    top: '50%',
+                    borderRadius: '10px',
+                    background: Colors.background_light,
+                    boxShadow: `0px 3px 10px ${Colors.shadow_light}`,
+                  }}>
+                  <Typography
+                    letterSpacing={'0.5px'}
+                    sx={{
+                      width: '100%',
+                      textAlign: 'center',
+                      margin: '15px 0px 0px 0px',
+                    }}>
+                    <Link
+                      href={'/profile'}
+                      style={{
+                        textDecoration: 'none',
+                        color: Colors.standard_light_white,
+                      }}>
+                      Profile
+                    </Link>
+                  </Typography>
+                  <Typography
+                    letterSpacing={'0.5px'}
+                    onClick={() => signOut()}
+                    sx={{
+                      width: '100%',
+                      textAlign: 'center',
+                      margin: '10px 0px 15px 0px',
+                      cursor: 'pointer',
+                      color: Colors.standard_light_white,
+                    }}>
+                    Sign out
+                  </Typography>
+                </Box>
+              )}
+
+              {status === 'unauthenticated' && (
+                <Button color='inherit'>
+                  <Link
+                    href={'/signin'}
+                    style={{
+                      textDecoration: 'none',
+                      color: isHovering ? 'white' : Colors.standard_light_white,
+                    }}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}>
+                    Sign in
+                  </Link>
+                </Button>
+              )}
             </Toolbar>
           </AppBar>
         </Box>
