@@ -10,13 +10,13 @@ import { Colors } from '@constants/colors';
 import Link from 'next/link';
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
+import path from 'path';
 
 const TopBar = () => {
   const { data: session, status } = useSession();
 
   const [isHovering, setIsHovering] = useState(false);
   const [avatarClick, setAvatarClick] = useState(false);
-
   return (
     <>
       <div
@@ -61,7 +61,10 @@ const TopBar = () => {
                   alt=''
                   onClick={() => setAvatarClick(!avatarClick)}
                   sx={{ cursor: 'pointer' }}
-                  src='/static/images/avatar/2.jpg'
+                  src={
+                    session.user?.image ||
+                    path.join(__dirname, 'static/defaultavatar.png')
+                  }
                 />
               )}
 
@@ -71,7 +74,7 @@ const TopBar = () => {
                     width: '120px',
                     height: 'fit-content',
                     position: 'absolute',
-                    left: '76%',
+                    right: '35px',
                     top: '50%',
                     borderRadius: '10px',
                     background: Colors.background_light,
