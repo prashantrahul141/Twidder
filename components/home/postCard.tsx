@@ -25,7 +25,7 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
           maxWidth: 600,
           backgroundColor: Colors.background,
           border: `0.2pt inset ${Colors.standard_light_white}`,
-          borderRadius: '8px',
+          borderRadius: '5px',
           margin: '0px 10px',
           cursor: 'pointer',
         }}>
