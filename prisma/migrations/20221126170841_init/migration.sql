@@ -31,13 +31,22 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "name" TEXT,
     "email" TEXT,
-    "emailVerified" TIMESTAMP(3),
+    "emailVerified" TIMESTAMP(3) DEFAULT '2000-03-19 14:21:00 +02:00',
     "username" TEXT,
     "image" TEXT,
+    "banner" TEXT,
     "author_bio" TEXT,
     "author_joined_on" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Follows" (
+    "followerId" TEXT NOT NULL,
+    "followingId" TEXT NOT NULL,
+
+    CONSTRAINT "Follows_pkey" PRIMARY KEY ("followerId","followingId")
 );
 
 -- CreateTable
@@ -73,18 +82,6 @@ CREATE TABLE "Comment" (
 );
 
 -- CreateTable
-CREATE TABLE "_followers" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
-);
-
--- CreateTable
-CREATE TABLE "_followings" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
-);
-
--- CreateTable
 CREATE TABLE "_replies" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL
@@ -109,18 +106,6 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_followers_AB_unique" ON "_followers"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_followers_B_index" ON "_followers"("B");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_followings_AB_unique" ON "_followings"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_followings_B_index" ON "_followings"("B");
-
--- CreateIndex
 CREATE UNIQUE INDEX "_replies_AB_unique" ON "_replies"("A", "B");
 
 -- CreateIndex
@@ -133,6 +118,12 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Follows" ADD CONSTRAINT "Follows_followerId_fkey" FOREIGN KEY ("followerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Follows" ADD CONSTRAINT "Follows_followingId_fkey" FOREIGN KEY ("followingId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -143,18 +134,6 @@ ALTER TABLE "Comment" ADD CONSTRAINT "Comment_user_id_fkey" FOREIGN KEY ("user_i
 
 -- AddForeignKey
 ALTER TABLE "Comment" ADD CONSTRAINT "Comment_post_id_fkey" FOREIGN KEY ("post_id") REFERENCES "Post"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_followers" ADD CONSTRAINT "_followers_A_fkey" FOREIGN KEY ("A") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_followers" ADD CONSTRAINT "_followers_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_followings" ADD CONSTRAINT "_followings_A_fkey" FOREIGN KEY ("A") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_followings" ADD CONSTRAINT "_followings_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_replies" ADD CONSTRAINT "_replies_A_fkey" FOREIGN KEY ("A") REFERENCES "Comment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
