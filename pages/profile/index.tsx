@@ -2,12 +2,10 @@ import CompHead from '@components/common/CompHead';
 import CompSpeedDial from '@components/common/SpeedDial';
 import TopBar from '@components/common/Topbar';
 import ProfileBanner from '@components/profile/Profilebanner';
-import { Typography } from '@mui/material';
 import { getSession, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import prismaClient from '@lib/prismaDB';
 import { User, Follows, Post } from '@prisma/client';
-import path from 'path';
 import { NextPageContext } from 'next';
 
 const Profile = ({
@@ -22,24 +20,7 @@ const Profile = ({
 }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
-
-  if (status === 'loading') {
-    return (
-      <>
-        <Typography
-          fontFamily={'Lato'}
-          letterSpacing='1px'
-          sx={{
-            color: 'white',
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-          }}>
-          loading..
-        </Typography>
-      </>
-    );
-  } else if (status === 'unauthenticated') {
+  if (status === 'unauthenticated') {
     router.push('/signin');
   } else if (status === 'authenticated') {
     return (
