@@ -1,8 +1,7 @@
 import { Colors } from '@constants/colors';
-import { Avatar, Card, CardMedia, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import { useSession } from 'next-auth/react';
+import { Avatar, Card, CardMedia } from '@mui/material';
 import path from 'path';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 const ProfileBanner = ({
   bannerImg,
@@ -19,8 +18,14 @@ const ProfileBanner = ({
   following: number;
   likes: number;
 }) => {
-  const { data: session, status } = useSession();
-
+  const bannerTableStyles = {
+    padding: '4px 10px 0px 10px',
+    margin: '0px 1px',
+    width: 'fit-content',
+    textAlign: 'center',
+    fontSize: 'clamp(12px, 0.9rem, 18px)',
+    color: Colors.standard_white,
+  } as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
   return (
     <>
       <div
@@ -61,42 +66,35 @@ const ProfileBanner = ({
               left: '20px',
             }}
             src={avatarImg}></Avatar>
-          <Box
-            display={'flex'}
-            sx={{
-              border: '2px solid red',
-              display: 'inline-block',
-              width: '100%',
+          <div
+            style={{
+              position: 'absolute',
+              left: 'min(150px, 25%)',
+              width: 'max-content',
+              height: '14%',
+              display: 'flex',
             }}>
-            <Box
-              sx={{
-                width: '33%',
-                border: '2px solid red',
-              }}>
-              <Typography
-                sx={{
-                  color: Colors.standard_white,
-                }}>
-                Twiddets
-                <br />
-                <b>{12}</b>
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                width: '33%',
-                border: '2px solid red',
-              }}>
-              <Typography
-                sx={{
-                  color: Colors.standard_white,
-                }}>
-                Followers
-                <br />
-                <b>{followers}</b>
-              </Typography>
-            </Box>
-          </Box>
+            <div style={bannerTableStyles}>
+              Twiddets
+              <br />
+              <b>{posts}</b>
+            </div>
+            <div style={bannerTableStyles}>
+              Followers
+              <br />
+              <b>{followers}</b>
+            </div>
+            <div style={bannerTableStyles}>
+              Followings
+              <br />
+              <b>{following}</b>
+            </div>
+            <div style={bannerTableStyles}>
+              Likes
+              <br />
+              <b>{likes}</b>
+            </div>
+          </div>
         </Card>
       </div>
     </>
