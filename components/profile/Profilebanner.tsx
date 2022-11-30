@@ -1,7 +1,8 @@
 import { Colors } from '@constants/colors';
-import { Avatar, Card, CardMedia } from '@mui/material';
+import { Avatar, Button, Card, CardMedia } from '@mui/material';
 import path from 'path';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import CreateIcon from '@mui/icons-material/Create';
 
 const ProfileBanner = ({
   bannerImg,
@@ -95,6 +96,17 @@ const ProfileBanner = ({
               <b>{likes}</b>
             </div>
           </div>
+          <Button
+            sx={{
+              height: '40px',
+              position: 'absolute',
+              right: '15px',
+              margin: '5px 0px 0px 0px',
+            }}
+            variant='outlined'
+            href='/profile/edit'>
+            <CreateIcon />
+          </Button>
         </Card>
       </div>
     </>
