@@ -90,11 +90,6 @@ const ProfileBanner = ({
               <br />
               <b>{following}</b>
             </div>
-            <div style={bannerTableStyles}>
-              Likes
-              <br />
-              <b>{likes}</b>
-            </div>
           </div>
           <Button
             sx={{
