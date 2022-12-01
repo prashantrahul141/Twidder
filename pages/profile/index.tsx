@@ -5,21 +5,37 @@ import ProfileBanner from '@components/profile/Profilebanner';
 import { getSession, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import prismaClient from '@lib/prismaDB';
-import { User, Follows, Post } from '@prisma/client';
+import { User, Post } from '@prisma/client';
 import { NextPageContext } from 'next';
 import PostCards from '@components/lists/postCards';
 import { TypePost } from 'types/types';
+import UserLists from '@components/lists/userLists';
 
 const Profile = ({
   user,
 }: {
   user: User & {
-    followings: Follows[];
-    followers: Follows[];
+    followings: User[];
+    followers: User[];
     likes: Post[];
     posts: Post[] & TypePost[];
   };
 }) => {
+  const sampleUsersList: User[] = [];
+  for (let i = 0; i < 10; i++) {
+    sampleUsersList.push({
+      id: `thiisad${i}`,
+      name: 'thisisaname',
+      username: 'thjisisusername',
+      emailVerified: null,
+      author_bio: 'thisisabio for testing',
+      author_joined_on: null,
+      email: 'testemail141@gmail.com',
+      banner: null,
+      image: null,
+    });
+  }
+
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -56,12 +72,19 @@ const Profile = ({
           avatarImg={user.image || ''}
           followers={user.followers.length}
           following={user.followings.length}
-          posts={user.posts.length}
-          likes={user.likes.length}></ProfileBanner>
+          posts={user.posts.length}></ProfileBanner>
+
         {tab === possibleTabs.twiddets && (
           <PostCards _postcard={user.posts}></PostCards>
         )}
-        {tab === possibleTabs.followers}
+
+        {tab === possibleTabs.followers && (
+          <UserLists _userlist={sampleUsersList}></UserLists>
+        )}
+
+        {tab === possibleTabs.followings && (
+          <UserLists _userlist={sampleUsersList}></UserLists>
+        )}
       </>
     );
   }
