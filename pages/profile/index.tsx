@@ -10,7 +10,6 @@ import { NextPageContext } from 'next';
 import PostCards from '@components/lists/postCards';
 import { TypePost } from 'types/types';
 import UserLists from '@components/lists/userLists';
-import { Colors } from '@constants/colors';
 import NotFound from '@components/common/NotFound';
 
 const Profile = ({
