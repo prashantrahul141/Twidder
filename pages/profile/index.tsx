@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import prismaClient from '@lib/prismaDB';
 import { User, Follows, Post } from '@prisma/client';
 import { NextPageContext } from 'next';
+import PostCards from '@components/lists/postCards';
+import { TypePost } from 'types/types';
 
 const Profile = ({
   user,
@@ -15,11 +17,32 @@ const Profile = ({
     followings: Follows[];
     followers: Follows[];
     likes: Post[];
-    posts: Post[];
+    posts: Post[] & TypePost[];
   };
 }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
+
+  let { tab } = router.query;
+
+  // making sure tab parameter.
+  const possibleTabs = {
+    twiddets: 'twiddets',
+    followers: 'followers',
+    followings: 'followings',
+  };
+
+  if (tab) {
+    if (!(typeof tab === 'string')) {
+      tab = tab[0];
+    }
+    if (!Object.values(possibleTabs).includes(tab)) {
+      tab = 'twiddets';
+    }
+  } else {
+    tab = 'twiddets';
+  }
+
   if (status === 'unauthenticated') {
     router.push('/signin');
   } else if (status === 'authenticated') {
@@ -35,6 +58,10 @@ const Profile = ({
           following={user.followings.length}
           posts={user.posts.length}
           likes={user.likes.length}></ProfileBanner>
+        {tab === possibleTabs.twiddets && (
+          <PostCards _postcard={user.posts}></PostCards>
+        )}
+        {tab === possibleTabs.followers}
       </>
     );
   }
