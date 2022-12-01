@@ -3,6 +3,7 @@ import { Avatar, Button, Card, CardMedia, IconButton } from '@mui/material';
 import path from 'path';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import CreateIcon from '@mui/icons-material/Create';
+import Link from 'next/link';
 
 const ProfileBanner = ({
   bannerImg,
@@ -72,21 +73,33 @@ const ProfileBanner = ({
               height: '14%',
               display: 'flex',
             }}>
-            <div style={bannerTableStyles}>
-              Twiddets
-              <br />
-              <b>{posts}</b>
-            </div>
-            <div style={bannerTableStyles}>
-              Followers
-              <br />
-              <b>{followers}</b>
-            </div>
-            <div style={bannerTableStyles}>
-              Followings
-              <br />
-              <b>{following}</b>
-            </div>
+            <Link href={'/profile'} style={{ textDecoration: 'none' }}>
+              <div style={bannerTableStyles}>
+                Twiddets
+                <br />
+                <b>{posts}</b>
+              </div>
+            </Link>
+
+            <Link
+              href={'/profile?tab=followers'}
+              style={{ textDecoration: 'none' }}>
+              <div style={bannerTableStyles}>
+                Followers
+                <br />
+                <b>{followers}</b>
+              </div>
+            </Link>
+
+            <Link
+              href={'/profile?tab=followings'}
+              style={{ textDecoration: 'none' }}>
+              <div style={bannerTableStyles}>
+                Followings
+                <br />
+                <b>{following}</b>
+              </div>
+            </Link>
           </div>
           <IconButton
             aria-label='edit profile'
