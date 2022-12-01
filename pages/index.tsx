@@ -1,6 +1,6 @@
 import CompHead from '@components/common/CompHead';
 import CompSpeedDial from '@components/common/SpeedDial';
-import PostCards from '@components/home/postCards';
+import PostCards from '@components/lists/postCards';
 import { TypePost } from 'types/types';
 import TopBar from '@components/common/Topbar';
 
