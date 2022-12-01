@@ -59,7 +59,8 @@ const TopBar = () => {
               {status === 'authenticated' && (
                 <Avatar
                   alt=''
-                  onClick={() => setAvatarClick(!avatarClick)}
+                  onMouseEnter={() => setAvatarClick(true)}
+                  onMouseLeave={() => setAvatarClick(false)}
                   sx={{ cursor: 'pointer' }}
                   src={
                     session.user?.image ||
@@ -70,6 +71,8 @@ const TopBar = () => {
 
               {status === 'authenticated' && avatarClick && (
                 <Box
+                  onMouseEnter={() => setAvatarClick(true)}
+                  onMouseLeave={() => setAvatarClick(false)}
                   sx={{
                     width: '120px',
                     height: 'fit-content',
