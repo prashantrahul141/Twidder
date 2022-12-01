@@ -44,8 +44,9 @@ const CompPostCard = ({ _postcard }: { _postcard: TypePost }) => {
             <Typography
               fontWeight={400}
               color={Colors.standard_white}
-              fontFamily={'Oswald'}
-              letterSpacing='0.078rem'
+              fontFamily={'Roboto'}
+              fontSize='1rem'
+              letterSpacing='0.025rem'
               display={'flex'}
               justifyContent='center'
               alignItems={'center'}
