@@ -10,6 +10,7 @@ import { NextPageContext } from 'next';
 import PostCards from '@components/lists/postCards';
 import { TypePost } from 'types/types';
 import UserLists from '@components/lists/userLists';
+import { Colors } from '@constants/colors';
 
 const Profile = ({
   user,
@@ -74,8 +75,21 @@ const Profile = ({
           following={user.followings.length}
           posts={user.posts.length}></ProfileBanner>
 
-        {tab === possibleTabs.twiddets && (
+        {tab === possibleTabs.twiddets && user.posts.length > 0 && (
           <PostCards _postcard={user.posts}></PostCards>
+        )}
+
+        {tab === possibleTabs.twiddets && user.posts.length <= 0 && (
+          <p
+            style={{
+              color: Colors.standard_light_white,
+              position: 'absolute',
+              left: '50%',
+              marginTop: '50px',
+              transform: 'translate(-50%)',
+            }}>
+            No twiddets by {user.name}
+          </p>
         )}
 
         {tab === possibleTabs.followers && (
