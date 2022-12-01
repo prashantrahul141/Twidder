@@ -1,5 +1,5 @@
 import { Colors } from '@constants/colors';
-import { Avatar, Button, Card, CardMedia } from '@mui/material';
+import { Avatar, Button, Card, CardMedia, IconButton } from '@mui/material';
 import path from 'path';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import CreateIcon from '@mui/icons-material/Create';
@@ -10,21 +10,19 @@ const ProfileBanner = ({
   posts,
   followers = 0,
   following = 0,
-  likes = 0,
 }: {
   bannerImg: string;
   avatarImg: string;
   posts: number;
   followers: number;
   following: number;
-  likes: number;
 }) => {
   const bannerTableStyles = {
     padding: '4px 10px 0px 10px',
     margin: '0px 1px',
     width: 'fit-content',
     textAlign: 'center',
-    fontSize: 'clamp(12px, 0.9rem, 18px)',
+    fontSize: 'clamp(0.5rem, 0.5rem + 1vw, 1rem)',
     color: Colors.standard_white,
   } as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
   return (
@@ -34,7 +32,6 @@ const ProfileBanner = ({
           width: '100vw',
           background: `${Colors.background}`,
           height: 'clamp(250px, 60vw, 375px)',
-          position: 'fixed',
           boxShadow: 'none',
           top: '0',
           marginTop: '62px',
@@ -62,8 +59,8 @@ const ProfileBanner = ({
             sx={{
               position: 'absolute',
               top: '60%',
-              width: 'clamp(90px, 20vw, 130px)',
-              height: 'clamp(90px, 20vw, 130px)',
+              width: 'clamp(70px, 17vw, 115px)',
+              height: 'clamp(70px, 17vw, 115px)',
               left: '20px',
             }}
             src={avatarImg}></Avatar>
@@ -91,17 +88,20 @@ const ProfileBanner = ({
               <b>{following}</b>
             </div>
           </div>
-          <Button
+          <IconButton
+            aria-label='edit profile'
+            size='small'
+            href='/profile/edit'
             sx={{
-              height: '40px',
               position: 'absolute',
               right: '15px',
-              margin: '5px 0px 0px 0px',
-            }}
-            variant='outlined'
-            href='/profile/edit'>
-            <CreateIcon />
-          </Button>
+              margin: '15px 0px 0px 0px',
+            }}>
+            <CreateIcon
+              fontSize='small'
+              sx={{ color: `${Colors.standard_white}` }}
+            />
+          </IconButton>
         </Card>
       </div>
     </>
