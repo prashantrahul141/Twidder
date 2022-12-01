@@ -11,6 +11,7 @@ import PostCards from '@components/lists/postCards';
 import { TypePost } from 'types/types';
 import UserLists from '@components/lists/userLists';
 import { Colors } from '@constants/colors';
+import NotFound from '@components/common/NotFound';
 
 const Profile = ({
   user,
@@ -80,24 +81,24 @@ const Profile = ({
         )}
 
         {tab === possibleTabs.twiddets && user.posts.length <= 0 && (
-          <p
-            style={{
-              color: Colors.standard_light_white,
-              position: 'absolute',
-              left: '50%',
-              marginTop: '50px',
-              transform: 'translate(-50%)',
-            }}>
-            No twiddets by {user.name}
-          </p>
+          <NotFound text={`${user.name} hasn't twiddeted`}></NotFound>
         )}
 
-        {tab === possibleTabs.followers && (
+        {tab === possibleTabs.followers && user.followers.length > 0 && (
           <UserLists _userlist={sampleUsersList}></UserLists>
         )}
 
-        {tab === possibleTabs.followings && (
+        {tab === possibleTabs.followers && user.followers.length <= 0 && (
+          <NotFound
+            text={`${user.name} doens't have any followers.`}></NotFound>
+        )}
+
+        {tab === possibleTabs.followings && user.followings.length > 0 && (
           <UserLists _userlist={sampleUsersList}></UserLists>
+        )}
+
+        {tab === possibleTabs.followings && user.followings.length <= 0 && (
+          <NotFound text={`${user.name} doesn't follow anyone.`}></NotFound>
         )}
       </>
     );
