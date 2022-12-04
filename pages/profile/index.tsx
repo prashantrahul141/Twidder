@@ -11,6 +11,7 @@ import PostCards from '@components/lists/postCards';
 import { TypePost } from 'types/types';
 import UserLists from '@components/lists/userLists';
 import NotFound from '@components/common/NotFound';
+import ProfileSubDetails from '@components/profile/ProfileSubDetails';
 
 const Profile = ({
   user,
@@ -29,8 +30,9 @@ const Profile = ({
       name: 'thisisaname',
       username: 'thjisisusername',
       emailVerified: null,
-      author_bio: 'thisisabio for testing',
-      author_joined_on: null,
+      author_bio:
+        'thisisabio for testing thisisabio for testinghisisabio for testing thisisabio for testing',
+      author_joined_on: new Date(),
       email: 'testemail141@gmail.com',
       banner: null,
       image: null,
@@ -75,6 +77,8 @@ const Profile = ({
           following={user.followings.length}
           posts={user.posts.length}></ProfileBanner>
 
+        <ProfileSubDetails user={user}></ProfileSubDetails>
+
         {tab === possibleTabs.twiddets && user.posts.length > 0 && (
           <PostCards _postcard={user.posts}></PostCards>
         )}
@@ -83,14 +87,14 @@ const Profile = ({
           <NotFound text={`${user.name} hasn't twiddeted`}></NotFound>
         )}
 
-        {tab === possibleTabs.followers && user.followers.length > 0 && (
+        {tab === possibleTabs.followers && user.followers.length == 0 && (
           <UserLists _userlist={sampleUsersList}></UserLists>
         )}
 
-        {tab === possibleTabs.followers && user.followers.length <= 0 && (
+        {/* {tab === possibleTabs.followers && user.followers.length <= 0 && (
           <NotFound
             text={`${user.name} doens't have any followers.`}></NotFound>
-        )}
+        )} */}
 
         {tab === possibleTabs.followings && user.followings.length > 0 && (
           <UserLists _userlist={sampleUsersList}></UserLists>
