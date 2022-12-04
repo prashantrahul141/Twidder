@@ -8,11 +8,9 @@ const UserList = ({ _each_user }: { _each_user: User }) => {
     <>
       <div
         style={{
-          maxWidth: 600,
           backgroundColor: Colors.background,
           border: `0.1pt inset ${Colors.standard_light_white}`,
           borderRadius: '3px',
-          margin: '0px 10px',
           cursor: 'pointer',
         }}
         onClick={() => router.push(`/user/${_each_user.username}`)}>
@@ -58,7 +56,7 @@ const UserList = ({ _each_user }: { _each_user: User }) => {
           fontSize={'1rem'}
           letterSpacing='0.025rem'
           alignItems={'left'}
-          margin='20px 20px 20px 20px'
+          margin='20px 0px 20px 20px'
           color={Colors.standard_light_white}>
           {_each_user.author_bio}
         </Typography>
