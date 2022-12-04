@@ -39,11 +39,11 @@ model User {
   name             String?
   email            String?   @unique
   emailVerified    DateTime? @default("2000-03-19T14:21:00+02:00")
-  username         String?   @unique
+  username         String?   @unique @default(cuid())
   image            String?
   banner           String?
   author_bio       String?
-  author_joined_on DateTime? @default(now())
+  author_joined_on DateTime  @default(now())
 
   posts Post[] @relation("Author")
   likes Post[] @relation("Favourites")
