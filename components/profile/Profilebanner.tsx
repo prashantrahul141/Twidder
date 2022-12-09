@@ -1,22 +1,25 @@
 import { Colors } from '@constants/colors';
-import { Avatar, Button, Card, CardMedia, IconButton } from '@mui/material';
+import { Avatar, Card, CardMedia, IconButton, Typography } from '@mui/material';
 import path from 'path';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import CreateIcon from '@mui/icons-material/Create';
 import Link from 'next/link';
+import { Post, User } from '@prisma/client';
+import { TypePost } from 'types/types';
+import possibleTabs from 'types/consts';
+import { color } from '@mui/system';
 
 const ProfileBanner = ({
-  bannerImg,
-  avatarImg,
-  posts,
-  followers = 0,
-  following = 0,
+  user,
+  currentTab,
 }: {
-  bannerImg: string;
-  avatarImg: string;
-  posts: number;
-  followers: number;
-  following: number;
+  user: User & {
+    followings: User[];
+    followers: User[];
+    likes: Post[];
+    posts: Post[] & TypePost[];
+  };
+  currentTab: string;
 }) => {
   const bannerTableStyles = {
     padding: '4px 10px 0px 10px',
@@ -24,23 +27,23 @@ const ProfileBanner = ({
     width: 'fit-content',
     textAlign: 'center',
     fontSize: 'clamp(0.5rem, 0.5rem + 1vw, 1rem)',
-    color: Colors.standard_white,
   } as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+
   return (
     <>
       <div
         style={{
           width: '100vw',
           background: `${Colors.background}`,
-          height: 'clamp(250px, 60vw, 375px)',
+          height: 'clamp(400px, 70vw, 450px)',
           boxShadow: 'none',
           top: '0',
           marginTop: '62px',
         }}>
         <Card
           sx={{
-            width: '100vw',
-            height: 'clamp(250px, 60vw, 375px)',
+            width: '95vw',
+            height: 'clamp(400px, 70vw, 450px)',
             background: 'none',
             position: 'absolute',
             boxShadow: 'none',
@@ -50,21 +53,23 @@ const ProfileBanner = ({
           }}>
           <CardMedia
             image={
-              bannerImg || path.join(__dirname, 'static/defaultBanner.webp')
+              user.banner || path.join(__dirname, 'static/defaultBanner.webp')
             }
             sx={{
               width: '100%',
-              height: '75%',
+              height: '60%',
             }}></CardMedia>
           <Avatar
             sx={{
               position: 'absolute',
-              top: '60%',
+              top: '45%',
               width: 'clamp(70px, 17vw, 115px)',
               height: 'clamp(70px, 17vw, 115px)',
               left: '20px',
             }}
-            src={avatarImg}></Avatar>
+            src={
+              user.image || path.join(__dirname, 'static/defaultAvatar.webp')
+            }></Avatar>
           <div
             style={{
               position: 'absolute',
@@ -74,30 +79,51 @@ const ProfileBanner = ({
               display: 'flex',
             }}>
             <Link href={'/profile'} style={{ textDecoration: 'none' }}>
-              <div style={bannerTableStyles}>
+              <div
+                style={{
+                  ...bannerTableStyles,
+                  color:
+                    currentTab === possibleTabs.twiddets
+                      ? Colors.accent_blue
+                      : Colors.standard_white,
+                }}>
                 Twiddets
                 <br />
-                <b>{posts}</b>
+                <b>{user.posts.length}</b>
               </div>
             </Link>
 
             <Link
               href={'/profile?tab=followers'}
               style={{ textDecoration: 'none' }}>
-              <div style={bannerTableStyles}>
+              <div
+                style={{
+                  ...bannerTableStyles,
+                  color:
+                    currentTab === possibleTabs.followers
+                      ? Colors.accent_blue
+                      : Colors.standard_white,
+                }}>
                 Followers
                 <br />
-                <b>{followers}</b>
+                <b>{user.followers.length}</b>
               </div>
             </Link>
 
             <Link
               href={'/profile?tab=followings'}
               style={{ textDecoration: 'none' }}>
-              <div style={bannerTableStyles}>
+              <div
+                style={{
+                  ...bannerTableStyles,
+                  color:
+                    currentTab === possibleTabs.followings
+                      ? Colors.accent_blue
+                      : Colors.standard_white,
+                }}>
                 Followings
                 <br />
-                <b>{following}</b>
+                <b>{user.followings.length}</b>
               </div>
             </Link>
           </div>
@@ -115,6 +141,30 @@ const ProfileBanner = ({
               sx={{ color: `${Colors.standard_white}` }}
             />
           </IconButton>
+          <div style={{ marginTop: 'min(60px,10%)', marginLeft: '20px' }}>
+            <Typography
+              fontFamily={'Oswald'}
+              letterSpacing='1px'
+              fontSize={'1.9rem'}
+              color={Colors.standard_white}>
+              {user.name}
+            </Typography>
+            <Typography
+              fontFamily={'Roboto Mono'}
+              letterSpacing='0.1'
+              fontSize={'0.9rem'}
+              color={Colors.standard_light_white}>
+              @{user.username}
+            </Typography>
+            <Typography
+              fontFamily={'Roboto Mono'}
+              letterSpacing='0.1'
+              fontSize={'0.8rem'}
+              marginTop='10px'
+              color={Colors.standard_light_white_400}>
+              joined on {`${user.author_joined_on}`.split('T')[0]}
+            </Typography>
+          </div>
         </Card>
       </div>
     </>
