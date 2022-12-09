@@ -8,7 +8,7 @@ const PostCards = ({ _postcard }: { _postcard: TypePost[] }) => {
       <Box
         sx={{
           maxWidth: 600,
-          margin: '75px auto',
+          margin: '20px auto',
         }}>
         {_postcard.map((_eachpost) => {
           return (
