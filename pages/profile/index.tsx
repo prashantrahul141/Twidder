@@ -11,7 +11,7 @@ import PostCards from '@components/lists/postCards';
 import { TypePost } from 'types/types';
 import UserLists from '@components/lists/userLists';
 import NotFound from '@components/common/NotFound';
-import ProfileSubDetails from '@components/profile/ProfileSubDetails';
+import possibleTabs from 'types/consts';
 
 const Profile = ({
   user,
@@ -23,34 +23,12 @@ const Profile = ({
     posts: Post[] & TypePost[];
   };
 }) => {
-  const sampleUsersList: User[] = [];
-  for (let i = 0; i < 10; i++) {
-    sampleUsersList.push({
-      id: `thiisad${i}`,
-      name: 'thisisaname',
-      username: 'thjisisusername',
-      emailVerified: null,
-      author_bio:
-        'thisisabio for testing thisisabio for testinghisisabio for testing thisisabio for testing',
-      author_joined_on: new Date(),
-      email: 'testemail141@gmail.com',
-      banner: null,
-      image: null,
-    });
-  }
-
   const { data: session, status } = useSession();
   const router = useRouter();
 
   let { tab } = router.query;
 
   // making sure tab parameter.
-  const possibleTabs = {
-    twiddets: 'twiddets',
-    followers: 'followers',
-    followings: 'followings',
-  };
-
   if (tab) {
     if (!(typeof tab === 'string')) {
       tab = tab[0];
@@ -70,14 +48,7 @@ const Profile = ({
         <CompHead headTitle={session.user?.name || 'Profile'}></CompHead>
         <TopBar></TopBar>
         <CompSpeedDial></CompSpeedDial>
-        <ProfileBanner
-          bannerImg={user.banner || ''}
-          avatarImg={user.image || ''}
-          followers={user.followers.length}
-          following={user.followings.length}
-          posts={user.posts.length}></ProfileBanner>
-
-        <ProfileSubDetails user={user}></ProfileSubDetails>
+        <ProfileBanner currentTab={tab} user={user}></ProfileBanner>
 
         {tab === possibleTabs.twiddets && user.posts.length > 0 && (
           <PostCards _postcard={user.posts}></PostCards>
@@ -87,17 +58,17 @@ const Profile = ({
           <NotFound text={`${user.name} hasn't twiddeted`}></NotFound>
         )}
 
-        {tab === possibleTabs.followers && user.followers.length == 0 && (
-          <UserLists _userlist={sampleUsersList}></UserLists>
+        {tab === possibleTabs.followers && user.followers.length > 0 && (
+          <UserLists _userlist={user.followers}></UserLists>
         )}
 
-        {/* {tab === possibleTabs.followers && user.followers.length <= 0 && (
+        {tab === possibleTabs.followers && user.followers.length <= 0 && (
           <NotFound
             text={`${user.name} doens't have any followers.`}></NotFound>
-        )} */}
+        )}
 
         {tab === possibleTabs.followings && user.followings.length > 0 && (
-          <UserLists _userlist={sampleUsersList}></UserLists>
+          <UserLists _userlist={user.followings}></UserLists>
         )}
 
         {tab === possibleTabs.followings && user.followings.length <= 0 && (
