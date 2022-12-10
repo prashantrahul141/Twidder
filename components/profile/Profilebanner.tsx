@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { Post, User } from '@prisma/client';
 import { TypePost } from 'types/types';
 import possibleTabs from 'types/consts';
-import { color } from '@mui/system';
 
 const ProfileBanner = ({
   user,
