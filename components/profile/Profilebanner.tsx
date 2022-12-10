@@ -22,11 +22,11 @@ const ProfileBanner = ({
   currentTab: string;
 }) => {
   const bannerTableStyles = {
-    padding: '4px 10px 0px 10px',
+    padding: '4px 5px 0px 10px',
     margin: '0px 1px',
     width: 'fit-content',
     textAlign: 'center',
-    fontSize: 'clamp(0.5rem, 0.5rem + 1vw, 1rem)',
+    fontSize: 'clamp(0.7rem, 2.5vw, 0.9rem)',
   } as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
   return (
@@ -62,10 +62,10 @@ const ProfileBanner = ({
           <Avatar
             sx={{
               position: 'absolute',
-              top: '45%',
-              width: 'clamp(70px, 17vw, 115px)',
-              height: 'clamp(70px, 17vw, 115px)',
-              left: '20px',
+              top: '48%',
+              width: 'clamp(80px, 17vw, 115px)',
+              height: 'clamp(80px, 17vw, 115px)',
+              left: '10px',
             }}
             src={
               user.image || path.join(__dirname, 'static/defaultAvatar.webp')
@@ -133,7 +133,7 @@ const ProfileBanner = ({
             href='/profile/edit'
             sx={{
               position: 'absolute',
-              right: '15px',
+              right: '0px',
               margin: '15px 0px 0px 0px',
             }}>
             <CreateIcon
@@ -141,25 +141,25 @@ const ProfileBanner = ({
               sx={{ color: `${Colors.standard_white}` }}
             />
           </IconButton>
-          <div style={{ marginTop: 'min(60px,10%)', marginLeft: '20px' }}>
+          <div style={{ marginTop: 'max(50px,8%)', marginLeft: '10px' }}>
             <Typography
               fontFamily={'Oswald'}
               letterSpacing='1px'
-              fontSize={'1.9rem'}
+              fontSize={'clamp(1.3rem, 5vw, 1.9rem)'}
               color={Colors.standard_white}>
               {user.name}
             </Typography>
             <Typography
               fontFamily={'Roboto Mono'}
               letterSpacing='0.1'
-              fontSize={'0.9rem'}
+              fontSize={'clamp(0.7rem, 2.5vw, 0.9rem)'}
               color={Colors.standard_light_white}>
               @{user.username}
             </Typography>
             <Typography
               fontFamily={'Roboto Mono'}
               letterSpacing='0.1'
-              fontSize={'0.8rem'}
+              fontSize={'clamp(0.7rem, 2.5vw, 0.9rem)'}
               marginTop='10px'
               color={Colors.standard_light_white_400}>
               joined on {`${user.author_joined_on}`.split('T')[0]}
