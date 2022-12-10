@@ -55,7 +55,7 @@ const Profile = ({
         )}
 
         {tab === possibleTabs.twiddets && user.posts.length <= 0 && (
-          <NotFound text={`${user.name} hasn't twiddeted`}></NotFound>
+          <NotFound text={`${user.name} hasn't twiddeted ;(`}></NotFound>
         )}
 
         {tab === possibleTabs.followers && user.followers.length > 0 && (
@@ -64,7 +64,7 @@ const Profile = ({
 
         {tab === possibleTabs.followers && user.followers.length <= 0 && (
           <NotFound
-            text={`${user.name} doens't have any followers.`}></NotFound>
+            text={`${user.name} doesn't have any followers ;(`}></NotFound>
         )}
 
         {tab === possibleTabs.followings && user.followings.length > 0 && (
@@ -72,7 +72,7 @@ const Profile = ({
         )}
 
         {tab === possibleTabs.followings && user.followings.length <= 0 && (
-          <NotFound text={`${user.name} doesn't follow anyone.`}></NotFound>
+          <NotFound text={`${user.name} doesn't follow anyone ;(`}></NotFound>
         )}
       </>
     );
