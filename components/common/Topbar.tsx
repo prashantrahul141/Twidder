@@ -58,7 +58,7 @@ const TopBar = () => {
 
               {status === 'authenticated' && (
                 <Avatar
-                  alt=''
+                  alt='Avatar'
                   onMouseEnter={() => setAvatarClick(true)}
                   onMouseLeave={() => setAvatarClick(false)}
                   onClick={() => setAvatarClick(!avatarClick)}
