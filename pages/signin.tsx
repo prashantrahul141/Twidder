@@ -14,7 +14,7 @@ const SignIn = () => {
   } else if (status === 'unauthenticated') {
     return (
       <>
-        <CompHead headTitle='Sign Up'></CompHead>
+        <CompHead headTitle='Sign In'></CompHead>
         <Box
           sx={{
             display: 'block',

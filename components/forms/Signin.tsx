@@ -9,7 +9,7 @@ const Signin: FC = () => {
       sx={{
         border: `1pt solid ${Colors.standard_light_white_400}`,
         borderRadius: '5px',
-        width: '95vw',
+        width: '60vw',
         maxWidth: '400px',
         height: 'fit-content',
         marginTop: '50px',
