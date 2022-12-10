@@ -1,9 +1,10 @@
 let Colors = {
   background: '#1f2024',
+  topBarBackground: 'rgba(31, 32, 36, 0.4)',
   blue_background: '#2a3048',
   background_light: '#222428',
 
-  shadow_light: 'rgba(18, 18, 18, 1)',
+  shadow_light: 'rgba(18, 18, 18, 0.4)',
 
   standard_white: '#f3efff',
   standard_light_white: '#c8c8c8d9',

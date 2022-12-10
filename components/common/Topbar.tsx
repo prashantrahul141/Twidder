@@ -22,9 +22,10 @@ const TopBar = () => {
       <div
         style={{
           width: '100vw',
-          background: `${Colors.background}`,
+          background: `${Colors.topBarBackground}`,
           height: '60px',
           boxShadow: `0px 3px 10px ${Colors.shadow_light}`,
+          backdropFilter: 'blur(10px)',
           position: 'fixed',
           zIndex: '1',
           top: '0',
@@ -34,7 +35,7 @@ const TopBar = () => {
             position='fixed'
             sx={{
               height: '60px',
-              background: `${Colors.background}`,
+              background: `${Colors.topBarBackground}`,
               boxShadow: 'none',
               maxWidth: '900px',
               left: '50%',
