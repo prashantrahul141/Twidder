@@ -9,6 +9,7 @@ const NotFound = ({ text = 'Not Found.' }: { text: string | null }) => {
         left: '50%',
         marginTop: '50px',
         transform: 'translate(-50%)',
+        fontSize: 'clamp(0.9rem, 2.5vw, 1.2rem)',
       }}>
       {text}
     </p>
