@@ -5,9 +5,11 @@ import Editform from '@components/forms/Editform';
 import prismaClient from '@lib/prismaDB';
 import { Box } from '@mui/material';
 import { User } from '@prisma/client';
-import { NextPageContext } from 'next';
-import { getSession, useSession } from 'next-auth/react';
+import { GetServerSidePropsContext } from 'next';
+import { unstable_getServerSession } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import router from 'next/router';
+import { authOptions } from 'pages/api/auth/[...nextauth]';
 
 const Edit = ({ user }: { user: User }) => {
   const { data: session, status } = useSession();
@@ -28,8 +30,14 @@ const Edit = ({ user }: { user: User }) => {
   }
 };
 
-export const getServerSideProps = async (context: NextPageContext) => {
-  const session = await getSession(context);
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
   if (session) {
     const user: User | null = await prismaClient.user.findUnique({
       where: {
