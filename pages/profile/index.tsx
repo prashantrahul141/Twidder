@@ -2,16 +2,18 @@ import CompHead from '@components/common/CompHead';
 import CompSpeedDial from '@components/common/SpeedDial';
 import TopBar from '@components/common/Topbar';
 import ProfileBanner from '@components/profile/Profilebanner';
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import prismaClient from '@lib/prismaDB';
 import { User, Post } from '@prisma/client';
-import { NextPageContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import PostCards from '@components/lists/postCards';
 import { TypePost } from 'types/types';
 import UserLists from '@components/lists/userLists';
 import NotFound from '@components/common/NotFound';
 import possibleTabs from 'types/consts';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]';
 
 const Profile = ({
   user,
@@ -43,6 +45,8 @@ const Profile = ({
   if (status === 'unauthenticated') {
     router.push('/signin');
   } else if (status === 'authenticated') {
+    console.log('auth');
+
     return (
       <>
         <CompHead headTitle={session.user?.name || 'Profile'}></CompHead>
@@ -79,8 +83,14 @@ const Profile = ({
   }
 };
 
-export const getServerSideProps = async (context: NextPageContext) => {
-  const session = await getSession(context);
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
   if (session) {
     const user: User | null = await prismaClient.user.findUnique({
       where: {

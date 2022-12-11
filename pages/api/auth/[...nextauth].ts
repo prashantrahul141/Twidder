@@ -21,7 +21,7 @@ export const authOptions = {
       clientSecret: process.env.DISCORD_CLIENT_SECRET || '',
     }),
   ],
-  secret: process.env.JWT_SECRET,
+  secret: process.env.NEXUTAUTH_SECRET,
   pages: {
     signIn: '/signin',
     newUser: '/',
