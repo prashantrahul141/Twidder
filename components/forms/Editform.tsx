@@ -1,14 +1,18 @@
 import CssInputAdornment from '@components/common/CssInputAdornment';
 import CssTextField from '@components/common/CssTextField';
 import { Colors } from '@constants/colors';
-import { Avatar, Card, Typography } from '@mui/material';
+import { Avatar, Button, Card, CardMedia, Typography } from '@mui/material';
 import { User } from '@prisma/client';
 import path from 'path';
 import { useState } from 'react';
 
 const Editform = ({ user }: { user: User }) => {
   const [currentImg, setCurrentImg] = useState(
-    user.image || path.join(__dirname, 'static/defaultavatar.png')
+    user.image || '/static/defaultavatar.png'
+  );
+
+  const [currentBanner, setCurrentBanner] = useState(
+    user.banner || '/static/defaultBanner.webp'
   );
 
   // updating <Avatar> component image on upload
@@ -69,6 +73,13 @@ const Editform = ({ user }: { user: User }) => {
           }}
           src={currentImg}></Avatar>
 
+        <CardMedia
+          component='img'
+          height='140'
+          image={currentBanner}
+          alt='banner'
+        />
+
         <input
           type={'file'}
           id='avatarImgInput'
@@ -78,7 +89,7 @@ const Editform = ({ user }: { user: User }) => {
         <CssTextField
           id='outlined-basic'
           label='Name'
-          value={user.name}
+          defaultValue={user.name}
           variant='outlined'
           sx={{
             width: '100%',
@@ -91,7 +102,7 @@ const Editform = ({ user }: { user: User }) => {
           id='outlined-basic'
           label='Username'
           variant='outlined'
-          value={user.username}
+          defaultValue={user.username}
           sx={{
             width: '100%',
             maxWidth: '450px',
@@ -104,6 +115,17 @@ const Editform = ({ user }: { user: User }) => {
             ),
           }}
         />
+        <Button
+          sx={{
+            width: '100%',
+            maxWidth: '450px',
+            marginTop: '10px',
+            marginBottom: '10px',
+          }}
+          variant='outlined'
+          size='medium'>
+          Submit
+        </Button>
       </Card>
     </>
   );

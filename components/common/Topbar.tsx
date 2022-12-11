@@ -64,10 +64,7 @@ const TopBar = () => {
                   onMouseLeave={() => setAvatarClick(false)}
                   onClick={() => setAvatarClick(!avatarClick)}
                   sx={{ cursor: 'pointer' }}
-                  src={
-                    session.user?.image ||
-                    path.join(__dirname, 'static/defaultavatar.png')
-                  }
+                  src={session.user?.image || '/static/defaultavatar.png'}
                 />
               )}
 
