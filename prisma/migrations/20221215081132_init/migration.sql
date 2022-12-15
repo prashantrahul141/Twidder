@@ -33,10 +33,10 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" TIMESTAMP(3) DEFAULT '2000-03-19 14:21:00 +02:00',
     "username" TEXT,
-    "image" TEXT,
-    "banner" TEXT,
+    "image" TEXT NOT NULL DEFAULT '/static/defaultAvatar.png',
+    "banner" TEXT NOT NULL DEFAULT '/static/defaultBanner.webp',
     "author_bio" TEXT,
-    "author_joined_on" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "author_joined_on" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
