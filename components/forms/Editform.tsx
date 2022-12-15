@@ -3,7 +3,6 @@ import CssTextField from '@components/common/CssTextField';
 import { Colors } from '@constants/colors';
 import { Avatar, Button, Card, CardMedia, Typography } from '@mui/material';
 import { User } from '@prisma/client';
-import path from 'path';
 import { useState } from 'react';
 
 const Editform = ({ user }: { user: User }) => {
@@ -24,9 +23,6 @@ const Editform = ({ user }: { user: User }) => {
     if (avatarImgInput.files) {
       const file = avatarImgInput.files[0];
       if (file) {
-        const avatarComp = document.getElementById(
-          'avatarComp'
-        ) as HTMLImageElement;
         const objectUrl = URL.createObjectURL(file);
         setCurrentImg(objectUrl);
       }
