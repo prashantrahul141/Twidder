@@ -22,7 +22,11 @@ const Edit = ({ user }: { user: User }) => {
         <TopBar></TopBar>
         <CompSpeedDial></CompSpeedDial>
 
-        <Box sx={{ maxWidth: 600, margin: '75px auto' }}>
+        <Box
+          sx={{
+            maxWidth: 600,
+            margin: '75px auto',
+          }}>
           <Editform user={user}></Editform>
         </Box>
       </>
