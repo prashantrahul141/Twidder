@@ -1,43 +1,30 @@
-import CssInputAdornment from '@components/common/CssInputAdornment';
 import CssTextField from '@components/common/CssTextField';
 import { Colors } from '@constants/colors';
-import { Avatar, Button, Card, CardMedia, Typography } from '@mui/material';
+import { Button, Card, Typography } from '@mui/material';
 import { User } from '@prisma/client';
 import { useState } from 'react';
+import EditFormImageInput from '@components/Edit/EditFormAvatarInput.tsx';
+import EditFormBannerInput from '@components/Edit/EditFormBannerInput';
+import EditFormSizeWarning from '@components/Edit/EditFormSizeWarning';
+import EditFormUsernameInput from '@components/Edit/EditFormUsernameInput';
 
 const Editform = ({ user }: { user: User }) => {
-  const [currentImg, setCurrentImg] = useState(
-    user.image || '/static/defaultavatar.png'
-  );
-
-  const [currentBanner, setCurrentBanner] = useState(
-    user.banner || '/static/defaultBanner.webp'
-  );
-
-  // updating <Avatar> component image on upload
-  const onImageChange = () => {
-    const avatarImgInput = document.getElementById(
-      'avatarImgInput'
-    ) as HTMLInputElement;
-
-    if (avatarImgInput.files) {
-      const file = avatarImgInput.files[0];
-      if (file) {
-        const objectUrl = URL.createObjectURL(file);
-        setCurrentImg(objectUrl);
-      }
-    }
-  };
+  const [sizeWarning, setSizeWarning] = useState(false);
 
   return (
     <>
+      {sizeWarning && (
+        <EditFormSizeWarning
+          setSizeWarning={setSizeWarning}></EditFormSizeWarning>
+      )}
+
       <Card
         sx={{
           maxWidth: 600,
           backgroundColor: Colors.background,
           border: `0.2pt inset ${Colors.standard_light_white}`,
           borderRadius: '5px',
-          margin: '100px 10px',
+          margin: '100px 0px',
           padding: '20px 10px 20px 10px',
           textAlign: 'center',
         }}>
@@ -53,34 +40,13 @@ const Editform = ({ user }: { user: User }) => {
           EDIT
         </Typography>
 
-        <Avatar
-          alt='Avatar'
-          id='avatarComp'
-          sx={{
-            margin: '40px auto',
-            width: '80px',
-            height: '80px',
-            cursor: 'pointer',
-          }}
-          onClick={() => {
-            (
-              document.getElementById('avatarImgInput') as HTMLInputElement
-            ).click();
-          }}
-          src={currentImg}></Avatar>
+        <EditFormImageInput
+          userImage={user.image}
+          setSizeWarning={setSizeWarning}></EditFormImageInput>
 
-        <CardMedia
-          component='img'
-          height='140'
-          image={currentBanner}
-          alt='banner'
-        />
-
-        <input
-          type={'file'}
-          id='avatarImgInput'
-          style={{ visibility: 'hidden', position: 'absolute' }}
-          onChange={onImageChange}></input>
+        <EditFormBannerInput
+          userBanner={user.banner}
+          setSizeWarning={setSizeWarning}></EditFormBannerInput>
 
         <CssTextField
           id='outlined-basic'
@@ -94,23 +60,9 @@ const Editform = ({ user }: { user: User }) => {
           }}
         />
 
-        <CssTextField
-          id='outlined-basic'
-          label='Username'
-          variant='outlined'
-          defaultValue={user.username}
-          sx={{
-            width: '100%',
-            maxWidth: '450px',
-            marginTop: '10px',
-            marginBottom: '10px',
-          }}
-          InputProps={{
-            startAdornment: (
-              <CssInputAdornment position='start'>@</CssInputAdornment>
-            ),
-          }}
-        />
+        <EditFormUsernameInput
+          _userName={user.username}></EditFormUsernameInput>
+
         <Button
           sx={{
             width: '100%',
@@ -120,7 +72,7 @@ const Editform = ({ user }: { user: User }) => {
           }}
           variant='outlined'
           size='medium'>
-          Submit
+          save
         </Button>
       </Card>
     </>
